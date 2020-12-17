@@ -38,15 +38,15 @@ def save_to_db(AlarmId, AlarmName, Description):
 	print('DB: Save result')
 	db = connect_db()
 	db.cursor()
-	db.execute('INSERT INTO haas_errors (code, name, description) VALUES (?, ?, ?);', [AlarmId, AlarmName, Description])
+	db.execute('INSERT INTO sinumerik_errors (code, name, description) VALUES (?, ?, ?);', [AlarmId, AlarmName, Description])
 	db.commit()
 	db.close()
 	print('Status: OK')
 
 def main():
 
-	for page in range(1, 10):
-		url = f'http://www.helmancnc.com/haas-alarm-codes/{page}/'
+	for page in range(1, 3):
+		url = f'http://www.helmancnc.com/sinumerik-840d-alarm-list/{page}/'
 		html = get_html(url)
 		current = get_current_page(html)
 		for alarm in current:
